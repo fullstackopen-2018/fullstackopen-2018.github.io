@@ -1267,20 +1267,20 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 
-const Blog = mongoose.model('Blog', {
+const blogSchema = mongoose.Schema({
   title: String,
   author: String,
   url: String,
   likes: Number
 })
 
-module.exports = Blog
+const Blog = mongoose.model('Blog', blogSchema)
+
+const mongoUrl = 'mongodb://localhost/bloglist'
+mongoose.connect(mongoUrl, { useNewUrlParser: true })
 
 app.use(cors())
 app.use(bodyParser.json())
-
-const mongoUrl = 'mongodb://localhost/bloglist'
-mongoose.connect(mongoUrl)
 
 app.get('/api/blogs', (request, response) => {
   Blog
@@ -1306,7 +1306,7 @@ app.listen(PORT, () => {
 })
 ```
 
-Tee sovelluksesta toimiva _npm_-projekti. Jotta sovelluskehitys olisi sujuvaa, konfiguroi sovellus suoritettavaksi _nodemon_:illa. Voit luoda sovellukselle uuden tietokannan esim. mlabiin tai käyttää edellisen osan sovelluksen tietokantaa.
+Tee sovelluksesta toimiva _npm_-projekti. Jotta sovelluskehitys olisi sujuvaa, konfiguroi sovellus suoritettavaksi <i>nodemonilla</i>. Voit luoda sovellukselle uuden tietokannan esim. mlabiin tai käyttää edellisen osan sovelluksen tietokantaa.
 
 Varmista, että sovellukseen on mahdollista lisätä blogeja Postmanilla tai VS Code REST clientilla, ja että sovellus näyttää lisätyt blogit.
 

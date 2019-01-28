@@ -357,7 +357,7 @@ Jos ensimmäinen osa evaluoituu epätodeksi eli on [falsy](https://developer.moz
 
 Voimme suoraviivaistaa edellistä vielä hieman käyttämällä [kysymysmerkkioperaattoria](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator):
 
-```html
+```js
 return (
   <div>
     <h1>Muistiinpanot</h1>
@@ -381,17 +381,17 @@ Eli jos _this.state.user === null_ on [truthy](https://developer.mozilla.org/en-
 
 Tehdään vielä sellainen muutos, että jos käyttäjä on kirjautunut, renderöidään kirjautuneet käyttäjän nimi:
 
-```html
+```js
 return (
   <div>
     <h1>Muistiinpanot</h1>
 
     <Notification message={this.state.error}/>
 
-    {this.state.user === null ?
+    {user === null ?
       loginForm() :
       <div>
-        <p>{this.state.user.name} logged in</p>
+        <p>{user.name} logged in</p>
         {noteForm()}
       </div>
     }

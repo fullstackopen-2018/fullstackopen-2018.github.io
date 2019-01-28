@@ -1129,7 +1129,7 @@ test('note without content is not added ', async () => {
     important: true
   }
 
-  const intialNotes = await api
+  const initialNotes = await api
     .get('/api/notes')
 
   await api
@@ -1140,7 +1140,7 @@ test('note without content is not added ', async () => {
   const response = await api
     .get('/api/notes')
 
-  expect(response.body.length).toBe(intialNotes.body.length)
+  expect(response.body.length).toBe(initialNotes.length)
 })
 ```
 
@@ -1698,7 +1698,7 @@ Mikään ei kuitenkaan määrää dokumenttitietokannoissa, että viitteet on ta
     notes: [221212, 221255]
   },
   {
-    content: 'hellas',
+    username: 'hellas',
     _id: 141414,
     notes: [141414]
   }
@@ -1727,7 +1727,7 @@ Dokumenttitietokannat tarjoavat myös radikaalisti erilaisen tavan datan organis
     ]
   },
   {
-    content: 'hellas',
+    username: 'hellas',
     _id: 141414,
     notes: [
       {
@@ -2254,7 +2254,7 @@ loginRouter.post('/', async (request, response) => {
     await bcrypt.compare(body.password, user.passwordHash)
 
   if ( !(user && passwordCorrect) ) {
-    return response.status(401).send({ error: 'invalid username or password' })
+    return response.status(401).json({ error: 'invalid username or password' })
   }
 
   const userForToken = {
